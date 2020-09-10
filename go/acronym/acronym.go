@@ -12,13 +12,17 @@ import (
 	"strings"
 )
 
+var replacer = strings.NewReplacer("_", "", "-", " ")
+
 // Abbreviate should have a comment documenting it.
 func Abbreviate(s string) string {
+
+	cs := replacer.Replace(s)
 
 	acronym := ""
 
 	// Split the string into individual words
-	for _, words := range strings.SplitAfter(s, " ") {
+	for _, words := range strings.SplitAfter(cs, " ") {
 
 		// convert into a rune
 		words := []rune(words)
@@ -29,7 +33,7 @@ func Abbreviate(s string) string {
 		// convert to uppercase
 		upperLetters := strings.ToUpper(letters)
 
-		acronym += upperLetters
+		acronym += strings.TrimSpace(upperLetters)
 	}
 
 	return acronym
